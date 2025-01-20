@@ -1,0 +1,16 @@
+# DeChat Configuration Settings
+
+# Wallet Connect Project ID (Required)
+WALLET_CONNECT_PROJECT_ID=your_wallet_connect_project_id_here
+
+# Smart Contract Address (Required)
+CONTRACT_ADDRESS=your_contract_address_here
+
+# Pinata Settings (Required for image uploads)
+PINATA_API_KEY=your_pinata_api_key_here
+PINATA_SECRET_KEY=your_pinata_secret_key_here
+PINATA_JWT=your_pinata_jwt_here
+
+# Network Configuration (Required)
+NETWORK_RPC_URL=your_network_rpc_url_here
+CHAIN_ID=1 # 1 for Ethereum Mainnet, 5 for Goerli, etc.
