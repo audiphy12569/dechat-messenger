@@ -28,10 +28,16 @@ const chains = [mainnet, sepolia] as const;
 const wagmiConfig = defaultWagmiConfig({ 
   chains, 
   projectId, 
-  metadata 
+  metadata,
+  ssr: true
 });
 
-createWeb3Modal({ wagmiConfig, projectId, defaultChain: mainnet });
+createWeb3Modal({ 
+  wagmiConfig, 
+  projectId, 
+  defaultChain: mainnet,
+  themeMode: 'dark'
+});
 
 const App = () => (
   <WagmiConfig config={wagmiConfig}>
