@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -6,8 +6,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
 import { Send, Image, CreditCard } from "lucide-react";
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi';
-import { mainnet, sepolia } from 'viem/chains';
 
 interface Message {
   sender: string;
@@ -18,21 +16,6 @@ interface Message {
   ethAmount: number;
   imageHash: string;
 }
-
-// Initialize Web3Modal
-const projectId = import.meta.env.VITE_WALLET_CONNECT;
-
-const metadata = {
-  name: 'DeChat',
-  description: 'Decentralized Messaging Application',
-  url: window.location.host,
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
-};
-
-const chains = [mainnet, sepolia];
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
-
-createWeb3Modal({ wagmiConfig, projectId, chains });
 
 const Index = () => {
   const [messages, setMessages] = useState<Message[]>([]);
