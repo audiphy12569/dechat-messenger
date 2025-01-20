@@ -6,11 +6,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
 import { Send, Image, CreditCard } from "lucide-react";
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
-import { createWeb3Modal } from '@web3modal/wagmi';
-import { walletConnectProvider, EIP6963Connector } from '@web3modal/wagmi';
-import { configureChains, createConfig } from 'wagmi';
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi';
 import { mainnet, sepolia } from 'viem/chains';
-import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect';
 
 interface Message {
   sender: string;
@@ -25,11 +22,6 @@ interface Message {
 // Initialize Web3Modal
 const projectId = import.meta.env.VITE_WALLET_CONNECT;
 
-const { chains, publicClient } = configureChains(
-  [mainnet, sepolia],
-  [walletConnectProvider({ projectId })]
-);
-
 const metadata = {
   name: 'DeChat',
   description: 'Decentralized Messaging Application',
@@ -37,19 +29,8 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 };
 
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: [
-    new WalletConnectConnector({
-      chains,
-      options: {
-        projectId,
-        metadata,
-      },
-    }),
-  ],
-  publicClient,
-});
+const chains = [mainnet, sepolia];
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 
 createWeb3Modal({ wagmiConfig, projectId, chains });
 
